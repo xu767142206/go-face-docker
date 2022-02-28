@@ -1,5 +1,4 @@
-
-FROM ubuntu:18.04
+FROM ubuntu:22.04
  
 RUN  sed -i s@/archive.ubuntu.com/@/mirrors.aliyun.com/@g /etc/apt/sources.list
 RUN  sed -i s@/security.ubuntu.com/@/mirrors.aliyun.com/@g /etc/apt/sources.list
@@ -7,13 +6,8 @@ RUN  sed -i s@/security.ubuntu.com/@/mirrors.aliyun.com/@g /etc/apt/sources.list
 ENV TZ=Asia/Shanghai
 
 RUN apt-get update -y \
-    && apt-get install -y libdlib-dev libopenblas-dev libjpeg-turbo8-dev \
+    && apt-get install -y libdlib-dev libblas-dev libatlas-base-dev liblapack-dev libjpeg-turbo8-dev build-essential \
     && apt-get install -y pkg-config lxc-dev
-    # && apt-get install -y pkg-config lxc-dev \
-    # && add-apt-repository ppa:kagamih/dlib \
-    # && apt-get install -y libdlib-dev libjpeg-turbo8-dev
-COPY dlib-1.pc /usr/local/lib/pkgconfig/
-RUN apt-get install -y wget git gcc
 
 RUN wget -P /tmp https://dl.google.com/go/go1.16.linux-amd64.tar.gz
 
